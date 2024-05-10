@@ -9,14 +9,19 @@ import axios from 'axios';
 import { useSelector } from "react-redux";
 import MyTable from "./Table";
 import UTable from "./UTable";
+import { useNavigate } from "react-router-dom";
+import { NotificationManager } from "react-notifications";
 
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 const Userpage = () => {
+  const nav = useNavigate();
 
-
+   function navigation(){
+    nav('/home');
+   }
     const token = useSelector((state) => state.user.token);
     console.log("This is token",token);
 
@@ -38,7 +43,7 @@ const Userpage = () => {
         });
        
          if(res.data.isSuccess === true){
-          window.alert(res.data.message);
+          NotificationManager.success(res.data.message, "Success!");
           console.log(res.data.data);
           SetRec(res.data.data.wallet);
           Setdata(res.data.data);
@@ -79,6 +84,7 @@ const Userpage = () => {
       <Typography variant="h4" component="h2">Social Auth Type: {data.social_auth_type}</Typography>
       <Typography variant="h4" component="h2">Phone: {data.phone}</Typography>
       <Typography variant="h4" component="h2">Email: {data.email}</Typography>
+      <Button onClick={navigation}> Go to FAQ page </Button>
    
     </Box>
  

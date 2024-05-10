@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import {Stack, Typography} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import Container from '@mui/material/Container';
 import { createTheme} from '@mui/material/styles';
 import { useState,useEffect } from 'react';
@@ -10,13 +10,18 @@ import { useSelector } from "react-redux";
 
 import MealCard from "./MealCard";
 import MyTable from "./Table";
+import { useNavigate } from "react-router-dom";
 
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 const Home = () => {
+  const nav = useNavigate();
 
+  function navigation(){
+   nav('/userpage');
+  }
     const token = useSelector((state) => state.user.token);
     console.log("This is token",token);
 
@@ -37,7 +42,6 @@ const Home = () => {
         });
        
          if(res.data.isSuccess === true){
-          window.alert(res.data.message);
           console.log(res.data.data);
           SetRec(res.data.data);
          
@@ -71,6 +75,7 @@ const Home = () => {
       }}
     > 
     <Typography variant="h2" component="h2" > Home Page</Typography>
+    <Button onClick={navigation}> Go to User page </Button>
    <MyTable  rowap={faq}/>
    
     </Box>

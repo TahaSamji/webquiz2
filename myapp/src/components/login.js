@@ -21,19 +21,19 @@ const Login = () => {
             formData.append('email', values.email);
             formData.append('password', values.password);
             formData.append('social_auth_type', values.social_auth_type);
-            const response = await axios.post(
+            const res= await axios.post(
                 'https://sandbox.practical.me/api/login',
                 formData,
                 {
                     headers: { "Content-Type": "multipart/form-data" }
                 });
-            if (response.data.message === "User login successfully.") {
-                NotificationManager.success(response.data.message, "Success!");
-                dispatch(login({token : response.data.data.auth_token}))
+            if (res.data.message === "User login successfully.") {
+                NotificationManager.success(res.data.message, "Success!");
+                dispatch(login({token : res.data.data.auth_token}))
                 nav('/userpage');
             }
             else {
-                NotificationManager.error(response.data.message, "Error!");
+                NotificationManager.error(res.data.message, "Error!");
             }
         },
     });
