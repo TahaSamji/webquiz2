@@ -7,8 +7,6 @@ import { createTheme} from '@mui/material/styles';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from "react-redux";
-
-import MealCard from "./MealCard";
 import MyTable from "./Table";
 import { useNavigate } from "react-router-dom";
 
